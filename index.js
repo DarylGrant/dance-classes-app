@@ -28,8 +28,8 @@ app.get('/', (req, res) => {
 });
 
 // Add the routes
-app.use('/courses', courseRoutes); // This handles all /courses routes
-app.use('/auth', authRoutes); // This handles authentication routes
+app.use('/courses', courseRoutes); // Routes for courses
+app.use('/auth', authRoutes); // Routes for authentication
 
 // Start the server
 app.listen(PORT, () => {
