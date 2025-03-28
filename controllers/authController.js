@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const organiserDB = require('../models/organiserModel');  // Use organisers.db
 
 // Show login form
@@ -9,23 +11,61 @@ exports.getLogin = (req, res) => {
 exports.postLogin = (req, res) => {
     const { username, password } = req.body;
 
-    organiserDB.findOne({ username, password }, (err, organiser) => {
+    organiserDB.findOne({ username }, (err, organiser) => {
         if (err) {
             return res.render('login', { title: 'Login', error: 'An error occurred. Please try again later.' });
         }
 
-        if (organiser) {
-            req.session.organiser = organiser;  // Store the organiser in session
-            return res.redirect('/organiser/dashboard');  // Corrected redirection to /organiser/dashboard
+        if (!organiser) {
+            return res.render('login', { title: 'Login', error: 'Invalid credentials' });
         }
 
-        res.render('login', { title: 'Login', error: 'Invalid credentials' });
+        // Compare provided password with the stored hashed password
+        bcrypt.compare(password, organiser.password, (err, result) => {
+            if (err) {
+                return res.render('login', { title: 'Login', error: 'An error occurred. Please try again later.' });
+            }
+
+            if (result) {
+                // Generate a JWT token with the organiser's information
+                const payload = { username: organiser.username, role: organiser.role };
+                const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+
+                // Store the token in the session or cookie (depending on your preference)
+                res.cookie('jwt', accessToken, { httpOnly: true });
+
+                return res.redirect('/organiser/dashboard');
+            } else {
+                return res.render('login', { title: 'Login', error: 'Invalid credentials' });
+            }
+        });
     });
 };
 
 // Logout handler
 exports.logout = (req, res) => {
+    res.clearCookie('jwt');  // Clear the JWT cookie
     req.session.destroy(() => {
         res.redirect('/');
+    });
+};
+
+// Middleware to verify JWT
+exports.verifyToken = (req, res, next) => {
+    const token = req.cookies.jwt;  // Get the token from the cookies
+
+    if (!token) {
+        return res.redirect('/auth/login');  // Redirect to login if no token is found
+    }
+
+    // Verify the token
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.redirect('/auth/login');  // Redirect to login if token is invalid
+        }
+
+        // Store the decoded data in the request object
+        req.user = decoded;
+        next();
     });
 };
