@@ -30,11 +30,15 @@ exports.postLogin = (req, res) => {
                 // Generate a JWT token with the organiser's information
                 const payload = { username: organiser.username, role: organiser.role };
                 const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                
+                // Set the session organiser variable for dashboard access
+                req.session.organiser = organiser;
 
-                // Store the token in the session or cookie (depending on your preference)
+                // Store the token in a cookie
                 res.cookie('jwt', accessToken, { httpOnly: true });
 
-                return res.redirect('/organiser/dashboard');
+                // Redirect to the dashboard route mounted under /auth
+                return res.redirect('/auth/dashboard');
             } else {
                 return res.render('login', { title: 'Login', error: 'Invalid credentials' });
             }

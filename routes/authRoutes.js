@@ -9,7 +9,9 @@ router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 
 // Organiser dashboard route (after successful login)
-router.get('/organiser/dashboard', (req, res) => {
+// Because these routes are mounted under /auth (per your index.js),
+// this route will be accessible as /auth/dashboard
+router.get('/dashboard', (req, res) => {
     if (req.session.organiser) {
         res.render('dashboard', { title: 'Organiser Dashboard', organiser: req.session.organiser });
     } else {
