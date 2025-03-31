@@ -4,9 +4,6 @@ const userDB = require('../models/userModel'); // Updated to users.db
 // Get all courses
 exports.getCourses = (req, res) => {
     db.find({}, (err, courses) => {
-        if (err) {
-            return res.status(500).send("Error retrieving courses.");
-        }
         res.render('courses', { title: 'Courses', courses });
     });
 };

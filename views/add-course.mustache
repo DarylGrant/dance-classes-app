@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<form action="/courses/add" method="post">
+    <input type="text" name="name" placeholder="Course Name" required>
+    <input type="number" name="duration" placeholder="Duration (weeks)" required>
+    <input type="date" name="date" required>
+    <input type="time" name="time" required>
+    <textarea name="description" placeholder="Course Description" required></textarea>
+    <input type="text" name="location" placeholder="Location" required>
+    <input type="text" name="price" placeholder="Price" required>
+    <button type="submit">Add Course</button>
+</form>
