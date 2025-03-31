@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+<h2>Organisers</h2>
+<ul>
+    {{#organisers}}
+    <li>
+        {{username}} - 
+        <form action="/auth/remove-organiser/{{_id}}" method="post" style="display:inline;" onsubmit="return confirmDelete()">
+            <button type="submit">Remove Organiser</button>
+        </form>
+    </li>
+    {{/organisers}}
+</ul>
+<a href="/auth/dashboard">Back to Dashboard</a>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to remove this organiser?");
+    }
+</script>

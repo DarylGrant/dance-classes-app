@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const organiserDB = require('../models/organiserModel');
 const courseDB = require('../models/courseModel');
-const userDB = require('../models/userModel'); // Assuming you have a User model to manage users
+const userDB = require('../models/userModel');
 
 // Show login form
 exports.getLogin = (req, res) => {
@@ -50,21 +50,19 @@ exports.logout = (req, res) => {
     });
 };
 
-// Organiser dashboard (updated to include courses)
+// Organiser dashboard
 exports.getDashboard = (req, res) => {
     if (req.session.organiser) {
-        // Fetch courses for the logged-in organiser
         courseDB.find({ organiserId: req.session.organiser._id }, (err, courses) => {
             if (err) {
                 console.error("Error retrieving courses:", err);
                 return res.status(500).send("Error retrieving courses.");
             }
 
-            // Pass the courses to the dashboard view
             res.render('dashboard', {
                 title: 'Organiser Dashboard',
                 organiser: req.session.organiser,
-                courses: courses || []  // Pass an empty array if no courses found
+                courses: courses || []
             });
         });
     } else {
@@ -81,17 +79,16 @@ exports.getAddCourse = (req, res) => {
 exports.postAddCourse = (req, res) => {
     const { name, duration, date, time, description, location, price } = req.body;
 
-    // Add organiserId to associate the course with the organiser
-    courseDB.insert({ 
-        name, 
-        duration, 
-        date, 
-        time, 
-        description, 
-        location, 
-        price, 
+    courseDB.insert({
+        name,
+        duration,
+        date,
+        time,
+        description,
+        location,
+        price,
         students: [],
-        organiserId: req.session.organiser._id // Link course to the organiser
+        organiserId: req.session.organiser._id
     }, (err, newCourse) => {
         if (err) {
             return res.status(500).send("Error adding new course.");
@@ -146,10 +143,8 @@ exports.getCourseParticipants = (req, res) => {
             return res.status(404).send("Course not found.");
         }
 
-        // Fetch participants from the 'students' array in the course
         const studentIds = course.students;
 
-        // Assuming you have a User model to get student names
         userDB.find({ _id: { $in: studentIds } }, (err, students) => {
             if (err) {
                 return res.status(500).send("Error retrieving participants.");
@@ -161,6 +156,34 @@ exports.getCourseParticipants = (req, res) => {
                 students
             });
         });
+    });
+};
+
+// Show list of organisers
+exports.getOrganiserList = (req, res) => {
+    organiserDB.find({}, (err, organisers) => {
+        if (err) {
+            return res.status(500).send("Error retrieving organisers.");
+        }
+        
+        res.render('organiser-list', { title: 'List of Organisers', organisers });
+    });
+};
+
+// Remove organiser
+exports.removeOrganiser = (req, res) => {
+    const organiserId = req.params.id;
+
+    organiserDB.remove({ _id: organiserId }, {}, (err, numRemoved) => {
+        console.log("Removing organiser with ID:", organiserId); // Debugging log
+        
+        if (err || numRemoved === 0) {
+            console.error("Error removing organiser:", err);
+            return res.status(404).send("Organiser not found.");
+        }
+        
+        // Redirect to the organiser list after successful removal
+        res.redirect('/auth/organiser-list');
     });
 };
 
@@ -177,20 +200,8 @@ exports.addOrganiser = (req, res) => {
             if (err) {
                 return res.status(500).send("Error adding new organiser.");
             }
-            res.redirect('/auth/dashboard');
+            res.redirect('/auth/organiser-list'); // Redirect to the list of organisers
         });
-    });
-};
-
-// Remove organiser
-exports.removeOrganiser = (req, res) => {
-    const organiserId = req.params.id;
-
-    organiserDB.remove({ _id: organiserId }, {}, (err, numRemoved) => {
-        if (err || numRemoved === 0) {
-            return res.status(404).send("Organiser not found.");
-        }
-        res.redirect('/auth/dashboard');
     });
 };
 
