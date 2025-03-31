@@ -1,7 +1,16 @@
 <h1>{{title}}</h1>
 <ul>
     {{#courses}}
-    <li>{{name}} - {{duration}} weeks
+    <li>
+        <h3>{{name}}</h3>
+        <p><strong>Duration:</strong> {{duration}} weeks</p>
+        <p><strong>Start Date:</strong> {{date}}</p>
+        <p><strong>Time:</strong> {{time}}</p>
+        <p><strong>Description:</strong> {{description}}</p>
+        <p><strong>Location:</strong> {{location}}</p>
+        <p><strong>Price:</strong> {{price}}</p>
+
+        <!-- Enrollment form -->
         <form action="/courses/enroll" method="post">
             <input type="hidden" name="course" value="{{name}}">
             <input type="text" name="name" placeholder="Your Name" required>
