@@ -4,6 +4,8 @@ const session = require('express-session');
 const path = require('path');
 const courseRoutes = require('./routes/courseRoutes');
 const authRoutes = require('./routes/authRoutes');
+require('dotenv').config();
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
