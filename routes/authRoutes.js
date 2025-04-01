@@ -41,4 +41,11 @@ router.get('/edit-course/:id', authController.getEditCourse);
 // Delete course route
 router.post('/delete-course/:id', authController.deleteCourse);
 
+// Remove user route
+router.get('/remove-user', authController.getRemoveUser);
+
+// Remove user route
+router.post('/remove-user/:id', authController.removeUser);
+
+
 module.exports = router;

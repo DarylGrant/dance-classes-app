@@ -274,3 +274,32 @@ exports.getEditCourse = (req, res) => {
         res.render('edit-course', { title: 'Edit Course', course });
     });
 };
+
+// Show remove user page
+exports.getRemoveUser = (req, res) => {
+    if (req.session.organiser) {
+        userDB.find({}, (err, users) => {
+            if (err) {
+                console.error("Error retrieving users:", err);
+                return res.status(500).send("Error retrieving users.");
+            }
+            res.render('remove-user', { title: 'Remove User', users });
+        });
+    } else {
+        res.redirect('/auth/login');
+    }
+};
+
+// Remove user
+exports.removeUser = (req, res) => {
+    const userId = req.params.id;
+
+    userDB.remove({ _id: userId }, {}, (err, numRemoved) => {
+        if (err || numRemoved === 0) {
+            return res.status(404).send("User not found.");
+        }
+        res.redirect('/auth/remove-user');
+    });
+};
+
+
