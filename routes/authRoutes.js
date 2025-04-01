@@ -29,4 +29,16 @@ router.post('/remove-organiser/:id', authController.removeOrganiser);
 // Remove user from course
 router.get('/remove-user-from-course/:courseId/:userId', authController.removeUserFromCourse);
 
+// Manage courses route
+router.get('/manage-courses', authController.getManageCourses);
+
+// Update course route
+router.post('/update-course/:id', authController.updateCourse);
+
+// Edit course route
+router.get('/edit-course/:id', authController.getEditCourse);
+
+// Delete course route
+router.post('/delete-course/:id', authController.deleteCourse);
+
 module.exports = router;

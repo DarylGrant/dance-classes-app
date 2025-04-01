@@ -1,0 +1,30 @@
+<ul>
+    {{#courses}}
+    <li>
+        <h3>{{name}}</h3>
+        <p><strong>Duration:</strong> {{duration}} weeks</p>
+        <p><strong>Start Date:</strong> {{date}}</p>
+        <p><strong>Time:</strong> {{time}}</p>
+        <p><strong>Description:</strong> {{description}}</p>
+        <p><strong>Location:</strong> {{location}}</p>
+        <p><strong>Price:</strong> {{price}}</p>
+
+        <!-- Edit course button -->
+        <a href="/auth/edit-course/{{_id}}">
+            <button type="button">Edit Course</button>
+        </a>
+
+        <!-- Delete course form -->
+        <form action="/auth/delete-course/{{_id}}" method="post" style="display:inline;" onsubmit="return confirmDelete()">
+            <button type="submit">Delete Course</button>
+        </form>
+    </li>
+    {{/courses}}
+</ul>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to remove this course?");
+    }
+</script>
+<a href="/auth/dashboard">Back to Dashboard</a>

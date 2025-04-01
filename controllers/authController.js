@@ -216,3 +216,61 @@ exports.removeUserFromCourse = (req, res) => {
         res.redirect(`/auth/course-participants/${courseId}`);
     });
 };
+
+/// Show manage courses page
+exports.getManageCourses = (req, res) => {
+    if (req.session.organiser) {
+        courseDB.find({}, (err, courses) => {
+            if (err) {
+                console.error("Error retrieving courses:", err);
+                return res.status(500).send("Error retrieving courses.");
+            }
+            res.render('manage-courses', {
+                title: 'Manage Courses',
+                organiser: req.session.organiser,
+                courses: courses || []
+            });
+        });
+    } else {
+        res.redirect('/auth/login');
+    }
+};
+
+
+
+// Update course
+exports.updateCourse = (req, res) => {
+    const courseId = req.params.id;
+    const { name, duration, date, time, description, location, price } = req.body;
+
+    courseDB.update({ _id: courseId }, { $set: { name, duration, date, time, description, location, price } }, {}, (err, numReplaced) => {
+        if (err) {
+            return res.status(500).send("Error updating course.");
+        }
+        res.redirect('/auth/manage-courses');
+    });
+};
+
+// Delete course
+exports.deleteCourse = (req, res) => {
+    const courseId = req.params.id;
+
+    courseDB.remove({ _id: courseId }, {}, (err, numRemoved) => {
+        if (err || numRemoved === 0) {
+            return res.status(404).send("Course not found.");
+        }
+        res.redirect('/auth/manage-courses');
+    });
+};
+
+// Show edit course page
+exports.getEditCourse = (req, res) => {
+    const courseId = req.params.id;
+
+    courseDB.findOne({ _id: courseId }, (err, course) => {
+        if (err || !course) {
+            return res.status(404).send("Course not found.");
+        }
+        res.render('edit-course', { title: 'Edit Course', course });
+    });
+};

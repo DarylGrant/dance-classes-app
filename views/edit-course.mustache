@@ -1,0 +1,12 @@
+<h1>{{title}}</h1>
+<form action="/auth/update-course/{{course._id}}" method="post">
+    <input type="text" name="name" value="{{course.name}}" required>
+    <input type="number" name="duration" value="{{course.duration}}" required>
+    <input type="date" name="date" value="{{course.date}}" required>
+    <input type="time" name="time" value="{{course.time}}" required>
+    <textarea name="description">{{course.description}}</textarea>
+    <input type="text" name="location" value="{{course.location}}" required>
+    <input type="text" name="price" value="{{course.price}}" required>
+    <button type="submit">Update Course</button>
+</form>
+<a href="/auth/manage-courses">Back to Manage Courses</a>
