@@ -1,0 +1,26 @@
+<h1>{{title}}</h1>
+
+<form method="GET" action="/auth/generate-class-list">
+    <label for="courseId">Select a Course: </label>
+    <select name="courseId" id="courseId" required>
+        {{#courses}}
+            <option value="{{_id}}" {{#selectedCourseId}}{{#selected}}selected{{/selected}}{{/selectedCourseId}}>{{name}}</option>
+        {{/courses}}
+    </select>
+    <button type="submit">Generate Class List</button>
+</form>
+
+{{#course}}
+    <h2>Class List for {{course.name}}</h2>
+
+    {{#participants}}
+        <p>Name: {{name}}, Email: {{email}}</p>
+    {{/participants}}
+
+    {{^participants}}
+        <p>No participants enrolled in this course.</p>
+    {{/participants}}
+
+{{/course}}
+
+<a href="/auth/dashboard">Back to Dashboard</a>
