@@ -93,7 +93,11 @@ exports.postAddCourse = (req, res) => {
         if (err) {
             return res.status(500).send("Error adding new course.");
         }
-        res.redirect('/auth/dashboard');
+
+        res.render('add-course', {
+            title: 'Add New Course',
+            successMessage: 'Course successfully added!'
+        });
     });
 };
 
@@ -303,3 +307,47 @@ exports.removeUser = (req, res) => {
 };
 
 
+// Get all courses from the database
+exports.getGenerateClassList = (req, res) => {
+    if (req.session.organiser) {
+        courseDB.find({}, (err, courses) => {
+            if (err) {
+                console.error("Error retrieving courses:", err);
+                return res.status(500).send("Error retrieving courses.");
+            }
+
+            res.render('select-course', {
+                title: 'Select Course for Class List',
+                courses 
+            });
+        });
+    } else {
+        res.redirect('/auth/login');
+    }
+};
+
+
+
+
+/// Generate the class list for the selected course
+exports.getSelectCourse = (req, res) => {
+    const courseId = req.query.courseId;
+
+    courseDB.findOne({ _id: courseId }, (err, course) => {
+        if (err || !course) {
+            return res.status(404).send("Course not found.");
+        }
+
+        userDB.find({ course: course.name }, (err, participants) => {
+            if (err) {
+                return res.status(500).send("Error retrieving participants.");
+            }
+
+            res.render('class-list', {
+                title: `Class List for ${course.name}`,
+                course,
+                participants
+            });
+        });
+    });
+};

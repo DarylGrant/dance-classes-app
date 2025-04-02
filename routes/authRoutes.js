@@ -47,5 +47,10 @@ router.get('/remove-user', authController.getRemoveUser);
 // Remove user route
 router.post('/remove-user/:id', authController.removeUser);
 
+// Show the generate class list page
+router.get('/generate-class-list', authController.getGenerateClassList);
+
+// Handle course selection for generating class list
+router.get('/select-course', authController.getSelectCourse);
 
 module.exports = router;

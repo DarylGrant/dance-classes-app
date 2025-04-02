@@ -1,0 +1,10 @@
+<h1>Class List for {{course.name}}</h1>
+
+{{#participants}}
+    <p>Name: {{name}}, Email: {{email}}</p>
+{{/participants}}
+
+{{^participants}}
+    <p>No participants enrolled in this course.</p>
+{{/participants}}
+<a href="/auth/dashboard">Back to Dashboard</a>

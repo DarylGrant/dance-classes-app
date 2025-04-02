@@ -1,12 +1,51 @@
 <h1>{{title}}</h1>
+
+<!-- Success Message (will trigger the pop-up) -->
+{{#successMessage}}
+    <script type="text/javascript">
+        alert("{{successMessage}}"); // Show success message in a pop-up
+        window.location.href = "/auth/dashboard"; // Redirect to the dashboard after the pop-up
+    </script>
+{{/successMessage}}
+
+<!-- Form for Adding a Course -->
 <form action="/courses/add" method="post">
-    <input type="text" name="name" placeholder="Course Name" required>
-    <input type="number" name="duration" placeholder="Duration (weeks)" required>
-    <input type="date" name="date" required>
-    <input type="time" name="time" required>
-    <textarea name="description" placeholder="Course Description" required></textarea>
-    <input type="text" name="location" placeholder="Location" required>
-    <input type="text" name="price" placeholder="Price" required>
+    <div class="form-group">
+        <label for="name">Course Name</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="duration">Duration (weeks)</label>
+        <input type="number" id="duration" name="duration" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="date">Start Date</label>
+        <input type="date" id="date" name="date" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="time">Course Time</label>
+        <input type="time" id="time" name="time" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Course Description</label>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" id="price" name="price" required>
+    </div>
+
     <button type="submit">Add Course</button>
 </form>
-  <a href="/auth/dashboard">Back to Dashboard</a>
+
+<a href="/auth/dashboard">Back to Dashboard</a>

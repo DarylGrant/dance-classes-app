@@ -1,12 +1,53 @@
 <h1>{{title}}</h1>
+
+<!-- Form for Updating Course -->
 <form action="/auth/update-course/{{course._id}}" method="post">
-    <input type="text" name="name" value="{{course.name}}" required>
-    <input type="number" name="duration" value="{{course.duration}}" required>
-    <input type="date" name="date" value="{{course.date}}" required>
-    <input type="time" name="time" value="{{course.time}}" required>
-    <textarea name="description">{{course.description}}</textarea>
-    <input type="text" name="location" value="{{course.location}}" required>
-    <input type="text" name="price" value="{{course.price}}" required>
+    
+    <!-- Course Name -->
+    <div class="form-group">
+        <label for="name">Course Name</label>
+        <input type="text" id="name" name="name" value="{{course.name}}" required>
+    </div>
+    
+    <!-- Duration -->
+    <div class="form-group">
+        <label for="duration">Duration (in weeks)</label>
+        <input type="number" id="duration" name="duration" value="{{course.duration}}" required>
+    </div>
+    
+    <!-- Start Date -->
+    <div class="form-group">
+        <label for="date">Start Date</label>
+        <input type="date" id="date" name="date" value="{{course.date}}" required>
+    </div>
+    
+    <!-- Time -->
+    <div class="form-group">
+        <label for="time">Time</label>
+        <input type="time" id="time" name="time" value="{{course.time}}" required>
+    </div>
+    
+    <!-- Description -->
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" required>{{course.description}}</textarea>
+    </div>
+    
+    <!-- Location -->
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" value="{{course.location}}" required>
+    </div>
+    
+    <!-- Price -->
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text" id="price" name="price" value="{{course.price}}" required>
+    </div>
+    
+    <!-- Submit Button -->
     <button type="submit">Update Course</button>
 </form>
+
+<!-- Back to Manage Courses -->
 <a href="/auth/manage-courses">Back to Manage Courses</a>

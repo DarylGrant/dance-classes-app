@@ -1,0 +1,10 @@
+<form method="GET" action="/auth/select-course">
+    <label for="courseId">Select a Course: </label>
+    <select name="courseId" id="courseId" required>
+        {{#courses}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/courses}}
+    </select>
+    <button type="submit">Generate Class List</button>
+</form>
+<a href="/auth/dashboard">Back to Dashboard</a>
