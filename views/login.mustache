@@ -1,3 +1,10 @@
+<nav>
+    <a href="/">Home</a>
+    <a href="/courses">View Courses</a>
+    <a href="/about.html">About Us</a>
+    <a href="/auth/login">Login</a>
+</nav>
+
 <h1>{{title}}</h1>
 <form action="/auth/login" method="post">
     <input type="text" name="username" placeholder="Username" required>
@@ -8,4 +15,3 @@
 {{#error}}
     <p style="color: red;">{{error}}</p>
 {{/error}}
-<a href="/">Back to Homepage</a>

@@ -26,7 +26,7 @@ app.use(session({
 
 // Root route to render the home page
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Welcome to the Dance Classes App' });
+    res.render('index', { title: 'Dance Fusion' });
 });
 
 // Add the routes
