@@ -1,14 +1,67 @@
-<nav>
-    <a href="/">Home</a>
-    <a href="/courses">View Courses</a>
-    <a href="/about.html">About Us</a>
-    <a href="/auth/login">Login</a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Link to Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
 
-<h1>{{title}}</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Dance Fusion</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/courses">View Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<img src="/images/image.jpg" alt="People dancing at Dance Fusion" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">{{title}}</h1>
 
-<p>Welcome to Dance Fusion — your go-to destination for diverse and dynamic dance classes! Whether you're just starting out or you've been dancing for years, we offer a wide range of styles and sessions to keep you moving and inspired.</p>
+        <!-- Image Section -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                <img src="/images/image.jpg" alt="People dancing at Dance Fusion" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
 
-<p>Explore our weekly classes and exciting weekend workshops, covering everything from street and salsa to contemporary and creative movement. There’s something here for everyone — all ages, all levels, all styles. Come join the rhythm!</p>
+        <!-- Description Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <p class="lead">Welcome to Dance Fusion — your go-to destination for diverse and dynamic dance classes! Whether you're just starting out or you've been dancing for years, we offer a wide range of styles and sessions to keep you moving and inspired.</p>
+                <p>Explore our weekly classes and exciting weekend workshops, covering everything from street and salsa to contemporary and ballet. There’s something here for everyone — all ages, all levels, all styles. Come join us!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-4">
+        <p>&copy; 2025 Dance Fusion. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

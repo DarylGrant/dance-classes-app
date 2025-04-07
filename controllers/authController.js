@@ -170,7 +170,7 @@ exports.getOrganiserList = (req, res) => {
             return res.status(500).send("Error retrieving organisers.");
         }
         
-        res.render('organiser-list', { title: 'List of Organisers', organisers });
+        res.render('organiser-list', { title: 'Remove Organiser', organisers });
     });
 };
 
