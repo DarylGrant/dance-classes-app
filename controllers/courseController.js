@@ -1,5 +1,5 @@
 const db = require('../models/courseModel');
-const userDB = require('../models/userModel'); // Updated to users.db
+const userDB = require('../models/userModel'); 
 
 // Get all courses
 exports.getCourses = (req, res) => {

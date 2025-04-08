@@ -170,7 +170,7 @@ exports.getOrganiserList = (req, res) => {
             return res.status(500).send("Error retrieving organisers.");
         }
         
-        res.render('organiser-list', { title: 'Remove Organiser', organisers });
+        res.render('organiser-list', { title: 'Manage Organisers', organisers });
     });
 };
 
@@ -179,8 +179,6 @@ exports.removeOrganiser = (req, res) => {
     const organiserId = req.params.id;
 
     organiserDB.remove({ _id: organiserId }, {}, (err, numRemoved) => {
-        console.log("Removing organiser with ID:", organiserId); // Debugging log
-        
         if (err || numRemoved === 0) {
             console.error("Error removing organiser:", err);
             return res.status(404).send("Organiser not found.");
