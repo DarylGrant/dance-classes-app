@@ -14,7 +14,7 @@ The application is built using Node.js, Express, and NeDB for data storage. It f
 
 2. Start the application:
 
-   npm start
+   node index.js
 
 3. Visit the site locally at:  
 
