@@ -1,3 +1,5 @@
 {"username":"ivyg","password":"$2b$10$TGeqeZJRqYHdMrIE6WbPjOoAuaNa2AoGUWbjRibMpYCvs9Ek1FnVG","role":"manager","_id":"2qIcYWono4atG2Zh"}
 {"username":"admin","password":"$2b$10$R6KBNK5x637gmcQ3QzeJ4Oo5S9MKrjmV7c8ZTjU.tNinSgS/Tgrau","role":"organiser","_id":"AKwvtt67DzJVTsAF"}
 {"username":"darylg","password":"$2b$10$O/Ai5EY3Z2Aldczudn5Lqu14g2Rh3HF4zN428fTQeav4zF4ferN4C","role":"organiser","_id":"zwPyakEPWJGi5dGp"}
+{"$$deleted":true,"_id":"zwPyakEPWJGi5dGp"}
+{"username":"darylg","password":"$2b$10$1q8uEIQYT4mjjXsSA0.PAufifuHYZVOqvaAYLAM90kYhFYfkq3afi","role":"Supervisor","_id":"aD706gDhALnkXVSd"}
