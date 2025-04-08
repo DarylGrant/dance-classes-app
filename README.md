@@ -41,8 +41,9 @@ The application is built using Node.js, Express, and NeDB for data storage. It f
 
 ## Admin Login Credentials
 
+- **Username:** darylg  
+  **Password:** daryladmin
+
 - **Username:** admin  
   **Password:** admin123
 
-- **Username:** darylg  
-  **Password:** daryladmin
