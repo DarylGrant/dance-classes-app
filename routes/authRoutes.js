@@ -14,7 +14,7 @@ router.get('/dashboard', authController.getDashboard);
 // Logout handler
 router.get('/logout', authController.logout);
 
-// Show organiser list (FIXED MISSING ROUTE)
+// Show organiser list
 router.get('/organiser-list', authController.getOrganiserList); 
 
 // Add new organiser
@@ -23,7 +23,7 @@ router.get('/add-organiser', (req, res) => {
 });
 router.post('/add-organiser', authController.addOrganiser);
 
-// Handle removal of an organiser (POST request only)
+// Handle removal of an organiser
 router.post('/remove-organiser/:id', authController.removeOrganiser);
 
 // Remove user from course
