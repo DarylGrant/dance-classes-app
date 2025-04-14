@@ -4,7 +4,7 @@
 
 This is a web application for managing dance courses and class bookings for a local dance organisation called Dance Fusion. The system allows users to view and book courses, while organisers can manage course information, enrollments, and organisers.
 
-The application is built using Node.js, Express, and NeDB for data storage. It features a dynamic front-end using Mustache templates.
+The application is built using Node.js, Express, and NeDB for data storage. It features a dynamic front-end using Mustache templates and Bootstrap.
 
 ## How to Run
 
